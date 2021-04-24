@@ -156,11 +156,11 @@ html, body{
 }
 
 .btn__del{
-	width: 20px;
+	max-width: 20px;
 	height: 20px;
-	position: absolute;
+	/* position: absolute;
 	right: 10px;
-	bottom: 10px;
+	bottom: 10px; */
 }
 
 .btn__del img{
@@ -176,6 +176,7 @@ html, body{
 .tags__container{
 	display: flex;
 	align-items: center;
+	flex-wrap: wrap;
 }
 
 .note__tag{
@@ -184,19 +185,33 @@ html, body{
 	min-width: 15px;
 	padding: 4px;
 	border-radius: 8px;
-	margin: 0 2.5px;
+	margin: 2px 2.5px;
 }
 .add__tag{
-	width: 10px;
-	height: 20px;
+	font-size: 30px;
+	font-weight: 500;
+	background: transparent;
+	transition: all 0.1s linear 0s;
+}
+
+.add__tag:hover{
+	color: white;
+	transition: all 0.1s linear 0s;
 }
 
 .input__tag {
-	width: 50px;
+	width: 0px;
 	margin: 0 5px;
-	display: none;
+	display: block;
 }
 
 .input__tag.active{
-	display: block;
+	width: 50px;
+	transition: all 0.2s ease-in-out 0s;
+}
+
+.note__bottom{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }

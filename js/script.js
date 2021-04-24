@@ -4,10 +4,9 @@ const col1 = document.querySelector('.col-1');
 const col2 = document.querySelector('.col-2');
 const col3 = document.querySelector('.col-3');
 const addTag = document.querySelectorAll('.add__tag');
-
+let date = new Date();
 let Notes = [];
 let id = 0;
-let date = new Date();
 let newdate = formatDate(date, 'DD.MM.YY  hh:mm')//форматирование даты
 let colors = [
     [250, 128, 114],
@@ -19,6 +18,7 @@ let colors = [
     [240, 230, 140]
 ]
 let color;
+
 
 //нажатие на кнопку добавить
 addBtn.addEventListener('click', () => {
@@ -36,9 +36,6 @@ function noteMaker() {
                           
                         </div>
                         <div id='date${id}' class="note__date">${newdate}</div>
-                        <div class="tags__container">
-                            <div class="note__tag">#tag</div>
-                        </div>
                         <input type='submit' class="btn_note_add" onclick='addNoteToList(${id})' value='+'>
                     </div>
                 </div>`
@@ -95,24 +92,17 @@ function drawNotes() {
                                     <p>${note.text}</p>
                                 </div>
                                 <div id='date${note.id}' class="note__date">${note.date}</div>
-                                <div class="tags__container" id='tags${note.id}'>
-                                <input type='submit' value='+' class='add__tag' onclick='addNewTag(${note.id})'/>
-                                    <input type='text' class='input__tag' placeholder='#'/>
+                                <div class='note__bottom'>    
+                                    <div class="tags__container" id='tags${note.id}'>
+                                    <input type='submit' value='+' class='add__tag' onclick='addNewTag(${note.id})'/>
+                                        <input type='text' class='input__tag' placeholder='#'/>
+                                    </div>
+                                    <div class='btn__del'  onclick='delNote(${note.id})'><img src='../img/1.png'/></div>
                                 </div>
-                                <div class='btn__del'  onclick='delNote(${note.id})'><img src='../img/1.png'/></div>
                             </div>
                         </div>`
         note.column.insertAdjacentHTML('afterbegin', noteObj);
-        let noteTags = document.getElementById('tags'+note.id);
-        let tags = note.tags;
-        if(noteTags !== null){
-            tags.forEach(tag=>{
-                const div = document.createElement('div')
-                div.classList='note__tag'
-                div.innerText = '#'+tag
-                noteTags.appendChild(div);        
-            })
-        }
+        drawTags(note); //добавление тегов в контейнер тегов перед отрисовкой
     })
 }
 
@@ -211,11 +201,26 @@ function addNewTag(id){
         if(input.parentElement.id == 'tags'+id){
             //отображение/скрытие добавления
             input.classList.toggle('active');
+            //если поле добавление активно, то при следующем нажатии нужно добавить тег
             if(!input.classList.contains('active')){
                 Notes[id].tags.push(input.value)
-                console.log(Notes[id])
-                drawNotes();
+                drawNotes(); //перерисовка с новыми тегами
             }
         }
    });
+}
+
+function drawTags(note){
+    //получает поле тэгов нужной заметки
+    let noteTags = document.getElementById('tags'+note.id);
+    //получет теги заметки
+    let tags = note.tags;
+    if(noteTags !== null){
+        tags.forEach(tag=>{
+            const div = document.createElement('div') //контейнер тега
+            div.classList='note__tag' //класс контейнера тега
+            div.innerText = '#'+tag //вставка текста тега
+            noteTags.appendChild(div); //вставка тега в поле тегов 
+        })
+    }
 }
