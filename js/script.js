@@ -5,8 +5,8 @@ const col2 = document.querySelector('.col-2');
 const col3 = document.querySelector('.col-3');
 const addTag = document.querySelectorAll('.add__tag');
 let date = new Date();
-let Notes = [];
-let id = 0;
+let Notes = JSON.parse(localStorage.getItem('notes'));
+let id = Notes.length > 0 ? Notes[Notes.length-1].id+1 : 0;
 let newdate = formatDate(date, 'DD.MM.YY  hh:mm')//форматирование даты
 let colors = [
     [250, 128, 114],
@@ -18,7 +18,7 @@ let colors = [
     [240, 230, 140]
 ]
 let color;
-
+drawNotes()
 
 //нажатие на кнопку добавить
 addBtn.addEventListener('click', () => {
@@ -44,6 +44,8 @@ function noteMaker() {
     Notes.forEach(note => {
         moveCol(note, 'r');
     })
+    id++
+    console.log(id)
     //удаление старого отображения
     clearHTML();
     //отрисовка нового
@@ -51,7 +53,6 @@ function noteMaker() {
 
     //вставка макета в первую колонку
     col1.insertAdjacentHTML('afterbegin', noteObj);
-    id++;
 }
 
 //создание заметки и добавление ее в список
@@ -67,7 +68,7 @@ function addNoteToList(id) {
         title: title.value,
         text: text.value,
         date: date.innerText,
-        column: col1,
+        column: 'col1',
         color: color,
         tags: []
     }
@@ -75,6 +76,7 @@ function addNoteToList(id) {
     //не вставляет пустую заметку
     if (noteObj.title != '' && noteObj.text != '') {
         Notes.push(noteObj);
+        localStorage.setItem('notes', JSON.stringify(Notes))
         note.remove(); //удаляет создающий макет заметки
         drawNotes();
     }
@@ -101,9 +103,10 @@ function drawNotes() {
                                 </div>
                             </div>
                         </div>`
-        note.column.insertAdjacentHTML('afterbegin', noteObj);
+        getColumn(note.column).insertAdjacentHTML('afterbegin', noteObj);//используется getColumn, т.к. JSON не может хранить html объекты
         drawTags(note); //добавление тегов в контейнер тегов перед отрисовкой
     })
+    console.log(Notes)
 }
 
 //удаляет объекты перед перерисовкой 
@@ -118,25 +121,25 @@ function clearHTML() {
 function moveCol(note, dir) {
     let col = note.column;
     if (dir == 'r') {
-        if (col == col1) {
-            note.column = col2;
+        if (col == 'col1') {
+            note.column = 'col2';
         }
-        if (col == col2) {
-            note.column = col3;
+        if (col == 'col2') {
+            note.column = 'col3';
         }
-        if (col == col3) {
-            note.column = col1;
+        if (col == 'col3') {
+            note.column = 'col1';
         }
     }
     if (dir == 'l') {
-        if (col == col1) {
-            note.column = col3;
+        if (col == 'col1') {
+            note.column = 'col3';
         }
-        if (col == col2) {
-            note.column = col1;
+        if (col == 'col2') {
+            note.column = 'col1';
         }
-        if (col == col3) {
-            note.column = col2;
+        if (col == 'col3') {
+            note.column = 'col2';
         }
     }
 }
@@ -152,6 +155,7 @@ function delNote(id) {
             }
             //удаление необходимой заметки
             Notes.splice(index, 1); 
+            localStorage.setItem('notes', JSON.stringify(Notes))
             //отрисовка
             drawNotes();
             return
@@ -203,8 +207,14 @@ function addNewTag(id){
             input.classList.toggle('active');
             //если поле добавление активно, то при следующем нажатии нужно добавить тег
             if(!input.classList.contains('active')){
-                Notes[id].tags.push(input.value)
-                drawNotes(); //перерисовка с новыми тегами
+                Notes.forEach((note, index)=>{
+                    if(note.id == id){
+                        Notes[index].tags.push(input.value)
+                        localStorage.setItem('notes', JSON.stringify(Notes))
+                        drawNotes(); //перерисовка с новыми тегами
+                        return
+                    }
+                })
             }
         }
    });
@@ -222,5 +232,18 @@ function drawTags(note){
             div.innerText = '#'+tag //вставка текста тега
             noteTags.appendChild(div); //вставка тега в поле тегов 
         })
+    }
+}
+
+//возвращает нужную колонку
+function getColumn(col){
+    if(col == 'col1'){
+        return col1;
+    }
+    if(col == 'col2'){
+        return col2;
+    }
+    if(col == 'col3'){
+        return col3;
     }
 }
