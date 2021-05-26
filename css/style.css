@@ -1,217 +1,72 @@
-*{
-	padding: 0;
-	margin: 0;
-	border:0;
-	box-sizing: border-box;
-	font-family: 'Montserrat', sans-serif;
+* {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  box-sizing: border-box;
+  font-family: "Montserrat", sans-serif;
 }
 
-textarea {
-    border: none;
-    overflow: auto;
-    outline: none;
-
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-
-    resize: none; /*remove the resize handle on the bottom right*/
+.wrapper {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 250px;
+  background: rgb(0, 74, 127);
 }
 
-html, body{
-	height: 100%;
-	background: rgba(255, 240, 245, 1);
+input {
+  border: 1px solid black;
+  height: 100px;
+  width: 100%;
 }
 
-#add__btn {
-	font-size: 50px;
-	color: black;
+.row {
+  display: flex;
+  color: white;
 }
 
-#add__btn:hover{
-	color: grey;
-	cursor: pointer;
-}
-.header {
-	height: 50px;
-	
-}
-.container__header {
-	max-width: 1030px;
-	margin: 0 auto;
-	height: 100%;
-}
-.nav__body {
-	border-bottom-left-radius: 15px; border-bottom-right-radius: 15px;
-	background-color: rgba(255, 255, 153, 1);
-	display: flex;
-	position: relative;
-	height: 100%;
-	width: 100%;
-	justify-content: space-between;
-	padding: 0 50px;
-	align-items: center;
-}
-.label {
-	font-size: 30px;
-	font-weight: 700;
+.buttons__body {
+  width: 100%;
 }
 
-.content{
-	height: 100%;
+#c_button {
+  width: 50%;
+  background: rgb(255, 45, 126);
 }
 
-.container{
-	max-width: 1000px;
-	margin: 0 auto;
-	height: 100%;
-	padding: 10px 20px;
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-around;
-	background: rgba(245, 245, 220, 1);
+#c_button:active {
+  background: rgb(120, 183, 175);
 }
 
-.note__box{
-	max-width: 300px;
-	padding: 15px;
-	margin-right: 10px;
-	display: flex;
-	flex-direction: column;
-	margin: 7.5px 0;
-	position: relative;
+.button {
+  width: 25%;
+  height: 50px;
+  text-align: center;
+  padding: 15px 0;
+  display: flex;
+  justify-content: center;
+  border: 1px solid white;
 }
 
-.corner{
-	height: 50px;
-	width: 50px;
-	position: absolute;
-	right: 0;
-	top: 0;
-	z-index: 0;
+.button:active {
+  background: rgb(120, 183, 175);
 }
 
-.container__note{
-	/* text-align: justify;
-	display: flex;
-	flex-direction: column; */
+#equal_button {
+  background: rgb(124, 226, 255);
+  width: 50%;
 }
 
-.note__title{
-	font-size: 25px;
-	font-weight: 600;
-	padding-bottom: 10px;
-	word-wrap: break-word;
-	padding-right: 30px;
+#equal_button:active {
+  background: rgb(120, 183, 175);
 }
 
-.note__text{
-	padding-bottom: 10px;
-	word-wrap: break-word;
-	z-index: 2;
-	position: relative;
+.digit__input {
+  text-align: right;
+  font-size: 30px;
 }
 
-.note__text p {
-}
-
-.note__date{
-	padding-bottom: 5px;
-}
-
-
-.title__input{
-	background-color: transparent;
-	width: 100%;
-	border-bottom: 3px solid black;
-	padding-bottom: 1px;
-}
-
-.text__input{
-	width: 100%;
-	margin: 10px 0;
-	min-height: 100px;
-	background: transparent;
-}
-
-.btn_note_add{
-	width: 50px;
-	position: absolute;
-	right: 10px;
-	bottom: 10px;
-	font-size: 40px;
-	background: transparent;
-	cursor: pointer;
-	transition: all 0.1s linear 0s;
-}
-
-.btn_note_add:hover{
-	color: white;
-	transition: all 0.1s linear 0s;
-}
-
-.col{
-	flex: 0 0 30%;
-	height: auto;
-}
-
-.btn__del{
-	max-width: 20px;
-	height: 20px;
-	/* position: absolute;
-	right: 10px;
-	bottom: 10px; */
-}
-
-.btn__del img{
-	width: 100%;
-	transition: all 0.3s ease 0s;
-}
-
-.btn__del:hover img{
-	filter: invert(1);
-	transition: all 0.1s linear 0s;
-}
-
-.tags__container{
-	display: flex;
-	align-items: center;
-	flex-wrap: wrap;
-}
-
-.note__tag{
-	background-color: rgba(255, 255, 255, 1);
-	/* display: flex; */
-	min-width: 15px;
-	padding: 4px;
-	border-radius: 8px;
-	margin: 2px 2.5px;
-}
-.add__tag{
-	font-size: 30px;
-	font-weight: 500;
-	background: transparent;
-	transition: all 0.1s linear 0s;
-}
-
-.add__tag:hover{
-	color: white;
-	transition: all 0.1s linear 0s;
-}
-
-.input__tag {
-	width: 0px;
-	margin: 0 5px;
-	display: block;
-}
-
-.input__tag.active{
-	width: 50px;
-	transition: all 0.2s ease-in-out 0s;
-}
-
-.note__bottom{
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
+input:focus {
+  outline: none;
 }

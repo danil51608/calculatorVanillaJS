@@ -1,46 +1,48 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
 <html>
- <head>
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet"> 
-  <link rel="stylesheet" type="text/css" href="css/style.css">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
- </head>
- <body>
-    <header class="header">
-        <div class="container__header">
-            <div class="nav__body">
-                <div class="label">MyNotes</div>
-                <div id="add__btn">+</div>
+
+<head>
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <div class='wrapper'>
+        <input type='text' placeholder=0 class='digit__input' readonly='readonly'></input>
+        <div class='buttons__body'>
+            <div class='row'>
+                <div class='button' id='c_button' onClick=Clear()>C</div>
+                <div class='button'>/</div>
+                <div class='button'>*</div>
             </div>
-        </div>
-    </header>
-    <div class="content">
-        <div class="container">
-            <div class="col-1 col">
+            <div class='row'>
+                <div class='button'>7</div>
+                <div class='button'>8</div>
+                <div class='button'>9</div>
+                <div class='button'>-</div>
             </div>
-            <div class="col-2 col">
-                
+            <div class='row'>
+                <div class='button'>4</div>
+                <div class='button'>5</div>
+                <div class='button'>6</div>
+                <div class='button'>+</div>
             </div>
-            <div class="col-3 col">
-                
+            <div class='row'>
+                <div class='button'>1</div>
+                <div class='button'>2</div>
+                <div class='button'>3</div>
+                <div class='button'>.</div>
             </div>
+            <div class='row'>
+                <div class='button'>0</div>
+                <div class='button'>00</div>
+                <div class='button' id='equal_button' onClick=Calculate()>=</div>
+            </div>
+
         </div>
     </div>
+
     <script src="js/script.js"></script>
 </body>
-</html>
 
-<!-- 
-    <div class="note__box">
-        <div class="container__note">
-            <div class="note__title">Title</div>
-            <div class="note__text">
-                <p>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Doloremque qui fugit quod adipisci delectus aliquam esse exercitationem nostrum quam consequuntur, asperiores inventore debitis aut, dicta corrupti maiores? Impedit, autem itaque.</p>
-            </div>
-            <div class="note__date">21.04.2021</div>
-            <div class="tags__container">
-                <div class="note__tag">#tag</div>
-            </div>
-        </div>
-    </div>
+</html>
